@@ -3,10 +3,10 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Basic Struts 2 Application - Welcome</title>
+    <title>familyPhotos</title>
   </head>
   <body>
-    <h1>Welcome To Struts 2!</h1>
+    <h2>Work in Progress</h2>
   </body>
 </html>
 

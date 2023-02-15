@@ -78,7 +78,7 @@ public class TestDatabaseConnection {
         finally {
             finalize();
         }
-        Assert.assertTrue(numberOfColumns == 4, "numberOfColumns == 4");
+        Assert.assertTrue(numberOfColumns == 11, "numberOfColumns == 11");
     }
 }
 

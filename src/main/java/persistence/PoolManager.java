@@ -4,12 +4,11 @@
  */
 package persistence;
 
-import java.util.*;
-import utility.ApplicationResourcesUtil;
+import java.util.ResourceBundle;
 
 
 /**
- * @author dkurth
+ * @author dankurth
  * 
  * Receives requests for dto classes and forwards them to the appropriate data 
  * access classes along with the appropriate ConnectionPool.
