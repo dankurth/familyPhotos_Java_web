@@ -13,7 +13,7 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 <link href="/pics_struts/common/css/styles.css" rel="stylesheet">
 <meta name="viewport" content="width=device-width">
 <title><s:text name="app.title"/></title>
-<!--<base href="http://localhost:8080/familyPhotos/jsp/viewPictures.jsp"> -->
+
 
 <style>
 
@@ -70,9 +70,6 @@ if (index+${length}-1 < indexMax) document.images.next.src="/familyPhotos/common
 	else document.images.next.src="/familyPhotos/common/images/arrow_small_right_disabled.gif";
 	if (index > indexMin) document.images.prev.src="/familyPhotos/common/images/arrow_small_left.gif";
 	else document.images.prev.src="/familyPhotos/common/images/arrow_small_left_disabled.gif";
-// img down removed, apparently
-//	if (indexMax > -1) document.images.down.src="/pics_struts/common/images/arrow_small_down.gif";
-//	else document.images.down.src="/pics_struts/common/images/arrow_small_down_disabled.gif";
 }
 
 function decrement() {
@@ -114,54 +111,12 @@ function login() {
 
 <div class="container">
   <div class="header">
-  <!-- hide search option for now 
-    <img width=22 height=20 style="float:left"  src="/pics_struts/common/images/ku1ziz.svg" onclick="search()">
-   	<form style="display: none" name="searchPictures" action="/pics_struts/searchPictures.do" ></form>
- -->
 <span>    
 <s:if test="viewCriteria != null && viewCriteria != ''">&nbps;
 <s:bean name="viewCriteria" />
 </s:if>
 </span>    
 
-<%-- menu is dysfunctional
-<!-- start menu -->
-<span class="dropdown" style="margin-right: 20%;">
-  <table>
-  <tr>
-  <td><bean:write name="user"/></td>
-  <td><img src="/pics_struts/common/images/dropdown.png" /></td>
-  </tr>
-  </table>
-
-<div class="items">
-<label style="margin-left:6px;" onclick="globeForm.submit()"><bean:message key="OtherLanguage"/></label>
-<form name="globeForm" action="/pics_struts/prefsProcess.do"> 
-<input type="hidden" name="action" value="toggleLanguage">       	
-</form>      
-<br>
-
-<% if (request.isUserInRole("user")) { %>
-  <html:link page="/profile.do"><bean:message key="profile"/></html:link><br>
-  <html:link page="/upload.do"><bean:message key="Upload"/></html:link><br>
-  <html:link page="/editPictures.do"><bean:message key="edit"/></html:link><br>
-<% } %>
-
-<% if (request.isUserInRole("unregistered")) { %>
-  <html:link page="/register.do"><bean:message key="register"/></html:link><br>
-<% } %>
-
-<% if (request.isUserInRole("admin")) { %>
-  <html:link page="/admin.do">admin</html:link><br>
-<% } %>
-
-  <html:link page="/searchPictures.do"><bean:message key="search"/></html:link><br>
-  <html:link page="/logoff.do"><bean:message key="logoff"/></html:link><br>
-
-</div>
-</span>
-<!-- end menu -->
- --%>
 
 <center>
 <span>
@@ -182,11 +137,6 @@ function login() {
 </span>
 </center>
 
-<!-- choosing display width of 330px simply because that looks best on my Avid 579 phone  which
-supposedly has 720x1440 pixels but acts as though it has 360x720 pixels ???. At any rate thumbnails
-pics are blurry at 330 so resized them to 360 then reduce size here (or in other app) to fit,
-may also allow user to choose thumbnail size or on mobile set it to match width dynamically.
-For now going with what works best for me. -->    
  </div>
   <div class="body">
     <div class="content">
