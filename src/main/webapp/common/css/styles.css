@@ -1,0 +1,30 @@
+.dropdown {
+  float: right;
+}
+
+.dropdown a {
+  margin-left: 6px;
+}
+
+.dropdown .items {
+  display: none;
+  background-color: white;
+  position: fixed;
+}
+
+.dropdown:hover .items {
+  display: block;
+}
+
+article {
+	background-color: black;
+}
+
+article img {
+	vertical-align: top;
+        margin-bottom: 4px;
+}
+
+header form {
+	display: inline;
+}

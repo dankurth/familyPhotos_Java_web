@@ -11,6 +11,17 @@
         <action name="index">
             <result>/index.jsp</result>
         </action>
+        
+        <action name="viewPictures" class="view.ViewPicturesInitAction" method="execute">
+            <result name="success">/jsp/viewPictures.jsp</result>
+        </action>
+        
+        <action name="viewPicturesProcess" class="view.ViewPicturesProcessAction" method="execute">
+            <result name="success" type="chain">viewPictures</result>
+        </action>
+        
+        <action	name="getImage" class="view.GetImageAction" method="execute" />
+        
     </package>
 
 </struts>

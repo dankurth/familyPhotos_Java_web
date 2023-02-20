@@ -34,6 +34,20 @@ ALTER TABLE ONLY pictures ALTER COLUMN id SET DEFAULT nextval('pictures_id_seq':
 ALTER TABLE ONLY pictures
     ADD CONSTRAINT pictures_md5_key UNIQUE (md5);
 
+CREATE TABLE user_roles (
+    user_name character varying(30) NOT NULL,
+    role_name character varying(15) NOT NULL
+);
 
+CREATE TABLE users (
+    user_name character varying(30) NOT NULL,
+    user_pass character varying(64) NOT NULL
+);
+
+CREATE TABLE groups (
+    name character varying(15) NOT NULL,
+    owner character varying(30) NOT NULL,
+    member character varying(30) NOT NULL
+);
 
 
