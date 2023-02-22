@@ -20,10 +20,10 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 <%--<html:base/>  --%> 
 
 <script>
-var picSize = "${requestScope.picSize}";
-var index = "${requestScope.index}";
+var picSize = "<s:property value='#picSize'/>";
+var index = <s:property value="#index"/>
 var indexMin = 0;
-var indexMax = "${sessionScope.picturesSize}" - 1; 
+var indexMax = <s:property value="#picturesSize"/> - 1;
 
 function updateImages() {
     if (index < indexMax) document.images.next.src="/familyPhotos/common/images/arrow_small_right.gif";
@@ -100,7 +100,8 @@ width: 50%;
 </style>
 </head>
 
-<body topmargin="0" bgcolor="white" onload="setPicSize(<s:property value='#picSize' />);updateImages();" >
+<body topmargin="0" bgcolor="white" onload="updateImages()" >
+
 <%--
 <html:errors/> 
 

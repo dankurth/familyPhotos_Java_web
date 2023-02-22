@@ -10,7 +10,7 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 
 <html><%--<html:html locale="true">  --%> 
 <head>
-<link href="/pics_struts/common/css/styles.css" rel="stylesheet">
+<link href="/familyPhotos/common/css/styles.css" rel="stylesheet">
 <meta name="viewport" content="width=device-width">
 <title><s:text name="app.title"/></title>
 
@@ -120,7 +120,7 @@ function login() {
 
 <center>
 <span>
-<img style="float:left" name="prev" src="/homePhotos/common/images/arrow_small_left.gif" onclick="decrement()">&nbsp;
+<img style="float:left" name="prev" src="/familyPhotos/common/images/arrow_small_left.gif" onclick="decrement()">&nbsp;
 
 <%--
 <s:if test="user == ''">
@@ -128,12 +128,12 @@ function login() {
 </s:if>
 <s:if test="user != ''">
 <s:bean name="user"/>
-<img src="/pics_struts/common/images/logout.png" width=22 height=20 style="float:center" onclick="logoff()">
-<form style="display: none" name="logoffForm" action="/pics_struts/logoff.do" ></form>
+<img src="/familyPhotos/common/images/logout.png" width=22 height=20 style="float:center" onclick="logoff()">
+<form style="display: none" name="logoffForm" action="/familyPhotos/logoff.do" ></form>
 </s:if>
  --%>
  
-<img style="float:right" name="next" src="/pics_struts/common/images/arrow_small_right.gif" onclick="increment()">
+<img style="float:right" name="next" src="/familyPhotos/common/images/arrow_small_right.gif" onclick="increment()">
 </span>
 </center>
 
