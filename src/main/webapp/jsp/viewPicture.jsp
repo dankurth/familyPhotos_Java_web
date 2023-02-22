@@ -118,7 +118,7 @@ width: 50%;
 <img name="prev" src="/familyPhotos/common/images/arrow_small_left.gif" onclick="decrement()">&nbsp;
       <form name="prev" method="post" action="/familyPhotos/viewPictureProcess"> 
       <input type="hidden" name="action" value="prevPicture">         
-      <input type="hidden" name="picSize" >
+      <input type="hidden" name="picSize" value=<s:property value="#picSize"/>>
       <input type="hidden" name="index" value=<s:property value="#index"/>>
    	  </form>      
 </td>
@@ -134,7 +134,7 @@ width: 50%;
 <img name="next" src="/familyPhotos/common/images/arrow_small_right.gif" onclick="increment()">
       <form name="next" method="post" action="/familyPhotos/viewPictureProcess"> 
       <input type="hidden" name="action" value="nextPicture">         
-      <input type="hidden" name="picSize" >
+      <input type="hidden" name="picSize" value=<s:property value="#picSize"/>>
       <input type="hidden" name="index" value=<s:property value="#index"/>>
       </form>      
 </td>

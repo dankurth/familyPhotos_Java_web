@@ -29,7 +29,8 @@ public final class ViewPictureProcessAction extends ActionSupport implements Ser
 		String indexString = request.getParameter("index");
 		int index = Integer.parseInt(indexString);
 		
-		String picSize = "thumbnails"; //preferred view size, not actual
+		String picSize = request.getParameter("picSize"); 
+		
 		String target = ERROR;
 		
 		ArrayList<?> pictures = (ArrayList<?>)session.getAttribute("pictures");
