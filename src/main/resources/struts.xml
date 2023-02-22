@@ -12,6 +12,14 @@
             <result>/index.jsp</result>
         </action>
         
+        <action name="viewPicture" class="view.ViewPictureInitAction" method="execute">
+            <result name="success">/jsp/viewPicture.jsp</result>
+        </action>
+
+        <action name="viewPictureProcess" class="view.ViewPictureProcessAction" method="execute">
+            <result name="success" type="chain">viewPicture</result>
+        </action>
+
         <action name="viewPictures" class="view.ViewPicturesInitAction" method="execute">
             <result name="success">/jsp/viewPictures.jsp</result>
         </action>

@@ -8,7 +8,7 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
 response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 %>
 
-<html lang="en"> 
+<html><%--<html:html locale="true">  --%> 
 <head>
 <link href="/pics_struts/common/css/styles.css" rel="stylesheet">
 <meta name="viewport" content="width=device-width">
@@ -158,20 +158,21 @@ function login() {
   
 </div> <!-- container -->
 
-     	<form style="display: none" name="prev" action="/familyPhotos/viewPicturesProcess.action"> 
+     	<form style="display: none" name="prev" action="/familyPhotos/viewPicturesProcess"> 
    		<input type="hidden" name="offset" value="{#session.offset}">
    		<input type="hidden" name="action" value="prevPictures">       	
    		</form>      
 
-	   	<form style="display: none" name="next" action="/familyPhotos/viewPicturesProcess.action"> 
+	   	<form style="display: none" name="next" action="/familyPhotos/viewPicturesProcess"> 
    		<input type="hidden" name="offset" value="{#session.offset}">
    		<input type="hidden" name="action" value="nextPictures">       	
    		</form>      
-<%--   		
-   		<form style="display: none" name="aForm" method="post" action="/familyPhotos/viewPicture.action">
+   		
+   		<form style="display: none" name="aForm" method="post" action="/familyPhotos/viewPicture">
    		<input type="hidden" name="action" value="viewPicture">
-   		<input type="hidden" name="index" value="%{index}">
+   		<%--<input type="hidden" name="index" value="%{index}">  --%>
+   		<input type="hidden" name="index" value="1">
    		</form>
- --%>
+
 </body>
 </html>
