@@ -53,4 +53,16 @@ public final class ViewPictureProcessAction extends ActionSupport implements Ser
 		return target;
 	}
 
+	public void setAction(String action) {
+		//testing
+	}
+	
+	public void setIndex(int index) {
+		
+	}
+
+	public void setPicSize(String picSize) {
+		
+	}
+
 }

@@ -102,5 +102,14 @@ public class GetImageAction extends ActionSupport implements ServletRequestAware
 
 		return null;
 	}
+	
+	public void setIndex(int index) {
+		
+	}
+	
+	public void setSize(String size) {
+		
+	}
+
 
 }

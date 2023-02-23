@@ -18,7 +18,7 @@ public final class ViewPictureInitAction extends ActionSupport implements Servle
     public void setServletRequest(HttpServletRequest httpServletRequest) {
         this.request = httpServletRequest;
     }
-
+    
 	public String execute() {
 
 		HttpSession session = request.getSession();
@@ -102,5 +102,12 @@ public final class ViewPictureInitAction extends ActionSupport implements Servle
 		target = SUCCESS;
 		return target;
 	}
-
+	
+	public void setAction(String action) {
+		//testing
+	}
+    
+	public void setIndex(int index) {
+		
+	}
 }

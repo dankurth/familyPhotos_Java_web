@@ -43,10 +43,12 @@ public class ViewPicturesInitAction extends ActionSupport implements ServletRequ
 
 			} catch (Exception e) {
 				e.printStackTrace();
-//				ActionMessages errors = new ActionMessages(); // TODO how do this in struts2?
+//				ActionMessages errors = new ActionMessages();
 //				errors.add("error.notFound.pictures", new ActionMessage(
 //				"error.notFound.pictures"));
 //				return ERROR; 
+				addActionError("error.notFound.pictures"); // how i18n?
+				return ERROR; 
 			}
 		}
 
@@ -60,8 +62,16 @@ public class ViewPicturesInitAction extends ActionSupport implements ServletRequ
 		Integer index = (Integer)session.getAttribute("index"); // quick hack!!! //TODO test
 		if (index == null) session.setAttribute("index", 0);
 
-
 		return SUCCESS;	
 	}
+	
+	public void validate() {
+//		addActionMessage("testMessage");
+	}
+	
+	public void setAction(String action) {
+		//testing
+	}
+
 
 }

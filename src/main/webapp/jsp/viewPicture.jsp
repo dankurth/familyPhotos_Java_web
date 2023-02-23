@@ -102,16 +102,22 @@ width: 50%;
 
 <body topmargin="0" bgcolor="white" onload="updateImages()" >
 
-<%--
-<html:errors/> 
+<s:actionerror/>
 
-<html:messages id="message" message="true">
-  <table width="100%"><tr><td align="center">
-<b><font color="green"><bean:write name="message"/></font></b>
+<%-- better, not yet improving...for now just replacing existing content
+<s:if test="hasActionErrors()">
+   <div>
+      <s:actionerror/>
+   </div>
+</s:if>
+ --%>
+ 	
+<s:if test="hasActionMessages()">
+<table><tr><td align="center">
+<b><font color="green"><s:actionmessage/></font></b>
 </td></tr></table>
 <hr>
-</html:messages>
---%>
+ </s:if>
 
 <table>
 <tr>

@@ -38,5 +38,14 @@ public class ViewPicturesProcessAction extends ActionSupport implements ServletR
 
 		return SUCCESS;		
 	}
+	
+	public void setAction(String action) {
+		//testing
+	}
+	
+	public void setOffset(int offset) {
+		
+	}
+
 
 }

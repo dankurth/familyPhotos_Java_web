@@ -7,7 +7,7 @@ response.setHeader("Pragma","no-cache"); //HTTP 1.0
 response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 %>
 
-<html><%--<html:html locale="true">  --%> 
+<html>
 <head>
 <link href="/familyPhotos/common/css/styles.css" rel="stylesheet">
 <meta name="viewport" content="width=device-width">
@@ -79,7 +79,8 @@ function decrement() {
 }
 
 function increment() {
-	if (index < indexMax) document.forms.next.submit();
+//	if (index < indexMax) document.forms.next.submit();
+	if (index+${length}-1 < indexMax) document.forms.next.submit();
 }
 
 function search() {
@@ -99,17 +100,24 @@ function login() {
 </head>
 
 <body bgcolor="white" onload="updateImages()">
-<%--<html:errors/> --%>
-	
-<%--	
-<html:messages id="message" message="true">
+<s:actionerror/>
+
+<%-- better, not yet improving...for now just replacing existing content
+<s:if test="hasActionErrors()">
+   <div>
+      <s:actionerror/>
+   </div>
+</s:if>
+ --%>
+ 	
+<s:if test="hasActionMessages()">
 <table><tr><td align="center">
-<b><font color="green"><s:bean name="message"/></font></b>
+<b><font color="green"><s:actionmessage/></font></b>
 </td></tr></table>
 <hr>
-</html:messages>
- --%>
-<s:set var="user" value="username"/>
+ </s:if>
+ 
+<s:set var="user" value="%{#session.username}"/>
 
 <div class="container">
   <div class="header">
@@ -118,9 +126,9 @@ function login() {
    	<form style="display: none" name="searchPictures" action="/pics_struts/searchPictures.do" ></form>
  -->
 <span>    
-<s:if test="viewCriteria != null && viewCriteria != ''">&nbps;
-<s:bean name="viewCriteria" />
-</s:if>
+<s:if test="viewCriteria != null && viewCriteria != ''">&nbps; 
+<s:property value="viewCriteria" />
+</s:if> 
 </span>    
 
 <%-- menu is dysfunctional
@@ -166,16 +174,15 @@ function login() {
 <span>
 <img style="float:left" name="prev" src="/familyPhotos/common/images/arrow_small_left.gif" onclick="decrement()">&nbsp;
 
-<%--
-<s:if test="user == ''">
-<s:a page="/loginProcess.do">login</s:a>
+<s:property value="#user"/>
+<s:if test="%{#session.username==''}">
+<s:a action="/loginProcess">login</s:a>
 </s:if>
-<s:if test="user != ''">
-<s:bean name="user"/>
+<s:else>
+<s:property value="#user"/>
 <img src="/familyPhotos/common/images/logout.png" width=22 height=20 style="float:center" onclick="logoff()">
-<form style="display: none" name="logoffForm" action="/familyPhotos/logoff.do" ></form>
-</s:if>
- --%>
+<form style="display: none" name="logoffForm" action="/familyPhotos/logoff" ></form>
+</s:else>
  
 <img style="float:right" name="next" src="/familyPhotos/common/images/arrow_small_right.gif" onclick="increment()">
 </span>
@@ -219,8 +226,7 @@ For now going with what works best for me. -->
    		
    		<form style="display: none" name="aForm" method="post" action="/familyPhotos/viewPicture">
    		<input type="hidden" name="action" value="viewPicture">
-   		<%--<input type="hidden" name="index" value="%{index}">  --%>
-   		<input type="hidden" name="index" value="1">
+   		<input type="hidden" name="index" value="{#request.index}">
    		</form>
 
 </body>
