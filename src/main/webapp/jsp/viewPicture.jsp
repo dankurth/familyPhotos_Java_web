@@ -17,7 +17,7 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 <head>
 <meta name="viewport" content="width=device-width">
 <title><s:text name="app.title"/></title>
-<%--<html:base/>  --%> 
+<base>
 
 <script>
 var picSize = "<s:property value='#picSize'/>";
