@@ -1,4 +1,4 @@
-current rougl steps to just use this web application to share photos 
+current rough steps to just use this web application to share photos 
 
 CAUTION: Currently ALL photos on the application are viewable by ANYone who can browse to it.
 
