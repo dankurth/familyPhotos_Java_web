@@ -13,6 +13,7 @@ import com.opensymphony.xwork2.ActionSupport;
 public class ViewPicturesProcessAction extends ActionSupport implements ServletRequestAware {
 	
     private HttpServletRequest request;
+    private String action;
 
     public void setServletRequest(HttpServletRequest httpServletRequest) {
         this.request = httpServletRequest;
@@ -20,9 +21,9 @@ public class ViewPicturesProcessAction extends ActionSupport implements ServletR
 
 	public String execute() {
 
-		HttpSession session = request.getSession();
-		String action = request.getParameter("action");
+		String action = getAction();
 
+		HttpSession session = request.getSession();
 		int offset = (Integer) session.getAttribute("offset");
 		int length = (Integer) session.getAttribute("length");
 		ArrayList<?> pictures = (ArrayList<?>)session.getAttribute("pictures");
@@ -38,14 +39,13 @@ public class ViewPicturesProcessAction extends ActionSupport implements ServletR
 
 		return SUCCESS;		
 	}
-	
-	public void setAction(String action) {
-		//testing
-	}
-	
-	public void setOffset(int offset) {
-		
+
+	public String getAction() {
+		return action;
 	}
 
+	public void setAction(String action) {
+		this.action = action;
+	}
 
 }

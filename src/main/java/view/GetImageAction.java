@@ -1,4 +1,5 @@
 package view;
+
 import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,46 +23,42 @@ import persistence.PoolManager;
 
 public class GetImageAction extends ActionSupport implements ServletRequestAware, ServletResponseAware {
 
-    private HttpServletRequest request;
+	private HttpServletRequest request;
+	protected ConnectionPool pool;
+	protected Connection con;
+	private int index;
 
-    public void setServletRequest(HttpServletRequest httpServletRequest) {
-        this.request = httpServletRequest;
-    }
+	public void setServletRequest(HttpServletRequest httpServletRequest) {
+		this.request = httpServletRequest;
+	}
 
-    private HttpServletResponse response;
-    
+	private HttpServletResponse response;
+
 	public void setServletResponse(HttpServletResponse response) {
 		this.response = response;
 	}
-	
-	protected ConnectionPool pool;
-	protected Connection con;  
 
 	public GetImageAction() {
 		initPool();
-	} 
+	}
 
 	protected void initPool() {
 		try {
 			PoolManager pm = PoolManager.getInstance();
 			pool = pm.getConnectionPool();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		}     
+		}
 	}
 
 	public String execute() {
 
-		//if (isCancelled(request)) return (mapping.findForward("cancel"));
+		// if (isCancelled(request)) return (mapping.findForward("cancel"));
 
 		HttpSession session = request.getSession();
-		String size = request.getParameter("size"); // may be "1024x768" or "thumbnails"
-		int index = Integer.parseInt(request.getParameter("index"));
-		if (size == null) size = "original";
 
-		ArrayList<?> pictures = (ArrayList<?>)session.getAttribute("pictures");
-		Picture picture = (Picture)pictures.get(index);
+		ArrayList<?> pictures = (ArrayList<?>) session.getAttribute("pictures");
+		Picture picture = (Picture) pictures.get(getIndex());
 		String md5 = picture.getMD5();
 
 		String query = "SELECT smallblob, LENGTH(smallblob) FROM pictures WHERE md5 = ?";
@@ -102,13 +99,26 @@ public class GetImageAction extends ActionSupport implements ServletRequestAware
 
 		return null;
 	}
-	
-	public void setIndex(int index) {
-		
+
+	private String size; // may be "1024x768" or "thumbnails" or "original"
+
+	public int getIndex() {
+		return index;
 	}
-	
-	public void setSize(String size) {
-		
+
+	public void setIndex(int index) {
+		this.index = index;
+	}
+
+	public String getSize() {
+		return size;
+	}
+
+	public void setSize(String size) { // may be "1024x768" or "thumbnails" or null
+		if (size == null)
+			this.size = "original";
+		else
+			this.size = size;
 	}
 
 

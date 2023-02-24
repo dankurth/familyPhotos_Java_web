@@ -14,7 +14,6 @@ import javax.servlet.http.HttpSession;
 public class ViewPicturesInitAction extends ActionSupport implements ServletRequestAware {
 
 	final static int length = Integer.parseInt(ApplicationResourcesUtil.length);
-
     private HttpServletRequest request;
 
     public void setServletRequest(HttpServletRequest httpServletRequest) {
@@ -59,13 +58,5 @@ public class ViewPicturesInitAction extends ActionSupport implements ServletRequ
 		if (index == null) session.setAttribute("index", 0);
 		return SUCCESS;	
 	}
-	
-	public void validate() {
-	}
-	
-	public void setAction(String action) {
-
-	}
-
 
 }

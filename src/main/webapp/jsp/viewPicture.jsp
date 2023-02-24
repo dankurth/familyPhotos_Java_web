@@ -133,7 +133,6 @@ width: 50%;
 <td valign="top" align="left">
 <img name="up" src="/familyPhotos/common/images/arrow_small_up.gif" onclick="showList()">&nbsp; <!-- function name must be different than form name else calls form  -->
        <form name="showListForm" method="post" action="/familyPhotos/viewPictures" >
-       <input type="hidden" name="action" value="viewPictures">        
        </form>    
 </td>
 

@@ -14,6 +14,7 @@ import dto.Picture;
 public final class ViewPictureInitAction extends ActionSupport implements ServletRequestAware {
 
     private HttpServletRequest request;
+	private int index;
 
     public void setServletRequest(HttpServletRequest httpServletRequest) {
         this.request = httpServletRequest;
@@ -37,15 +38,14 @@ public final class ViewPictureInitAction extends ActionSupport implements Servle
  * work around the use of both parameter and attribute for passing index to /viewPicture.
  * 		
  */
-		String indexParam = request.getParameter("index");
 		Object indexAttrib = request.getAttribute("index");
 		int index = 0;
 		if (indexAttrib != null) {
 			index = (Integer) indexAttrib;
 		}
 		else {
-			index = Integer.parseInt(indexParam);
-			request.setAttribute("index", indexParam);
+			index = getIndex();
+			request.setAttribute("index", index);
 		}
 		
 		String picSize = (String)request.getAttribute("picSize");
@@ -103,11 +103,11 @@ public final class ViewPictureInitAction extends ActionSupport implements Servle
 		return target;
 	}
 	
-	public void setAction(String action) {
-		//testing
+	public int getIndex() {
+		return index;
 	}
-    
+
 	public void setIndex(int index) {
-		
+		this.index = index;
 	}
 }

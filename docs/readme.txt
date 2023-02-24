@@ -26,6 +26,7 @@ set up database
 set up public route
     set up port forwarding on router
     optionally set up stable address
+    optionally set up to require https
 deploy war to Tomcat
 let someone know route to view photos 
 and again, 

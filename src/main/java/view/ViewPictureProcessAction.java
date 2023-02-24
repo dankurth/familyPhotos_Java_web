@@ -16,6 +16,9 @@ import com.opensymphony.xwork2.ActionSupport;
 public final class ViewPictureProcessAction extends ActionSupport implements ServletRequestAware {
 
     private HttpServletRequest request;
+	private String action;
+	private int index;
+	private String picSize;
 
     public void setServletRequest(HttpServletRequest httpServletRequest) {
         this.request = httpServletRequest;
@@ -24,13 +27,9 @@ public final class ViewPictureProcessAction extends ActionSupport implements Ser
 	public String execute() {
 
 		HttpSession session = request.getSession();
-		String action = request.getParameter("action");
-		
-		String indexString = request.getParameter("index");
-		int index = Integer.parseInt(indexString);
-		
-		String picSize = request.getParameter("picSize"); 
-		
+		String action = getAction();
+		int index = getIndex();
+		String picSize = getPicSize(); 
 		String target = ERROR;
 		
 		ArrayList<?> pictures = (ArrayList<?>)session.getAttribute("pictures");
@@ -53,16 +52,28 @@ public final class ViewPictureProcessAction extends ActionSupport implements Ser
 		return target;
 	}
 
-	public void setAction(String action) {
-		//testing
+	public String getAction() {
+		return action;
 	}
-	
+
+	public void setAction(String action) {
+		this.action = action;
+	}
+
+	public int getIndex() {
+		return index;
+	}
+
 	public void setIndex(int index) {
-		
+		this.index = index;
+	}
+
+	public String getPicSize() {
+		return picSize;
 	}
 
 	public void setPicSize(String picSize) {
-		
+		this.picSize = picSize;
 	}
 
 }

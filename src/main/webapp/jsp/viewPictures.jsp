@@ -217,17 +217,14 @@ For now going with what works best for me. -->
 </div> <!-- container -->
 
      	<form style="display: none" name="prev" action="/familyPhotos/viewPicturesProcess"> 
-   		<input type="hidden" name="offset" value="{#session.offset}">
    		<input type="hidden" name="action" value="prevPictures">       	
    		</form>      
 
 	   	<form style="display: none" name="next" action="/familyPhotos/viewPicturesProcess"> 
-   		<input type="hidden" name="offset" value="{#session.offset}">
    		<input type="hidden" name="action" value="nextPictures">       	
    		</form>      
    		
    		<form style="display: none" name="aForm" method="post" action="/familyPhotos/viewPicture">
-   		<input type="hidden" name="action" value="viewPicture">
    		<input type="hidden" name="index" value="{#request.index}">
    		</form>
 
