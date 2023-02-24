@@ -168,11 +168,13 @@ width: 50%;
   	</td>
   </tr>
 --%>  
+<%-- //TODO add this back in first after setting up means to add/edit description
   <tr>
   	<td>
   	<b><s:text name="Description"/>: </b><s:property value="#picture.description"/>
   	</td>
   </tr>
+ --%>  
 <%--
   <tr>
   	<td>

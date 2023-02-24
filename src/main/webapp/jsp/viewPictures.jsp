@@ -174,6 +174,7 @@ function login() {
 <span>
 <img style="float:left" name="prev" src="/familyPhotos/common/images/arrow_small_left.gif" onclick="decrement()">&nbsp;
 
+<%-- for now keep it simple, public viewable photos only so no need to log in
 <s:property value="#user"/>
 <s:if test="%{#session.username==''}">
 <s:a action="/loginProcess">login</s:a>
@@ -183,6 +184,7 @@ function login() {
 <img src="/familyPhotos/common/images/logout.png" width=22 height=20 style="float:center" onclick="logoff()">
 <form style="display: none" name="logoffForm" action="/familyPhotos/logoff" ></form>
 </s:else>
+  --%>
  
 <img style="float:right" name="next" src="/familyPhotos/common/images/arrow_small_right.gif" onclick="increment()">
 </span>
