@@ -4,6 +4,7 @@ CAUTION: Currently ALL photos on the application are viewable by ANYone who can 
 
 install Linux (it's not targeted at and probably won't work as-is on other platforms)
     can be on old small otherwise useless laptop, or as virtual machine, or ...
+install ImageMagick (will need to use "convert" while importing photos to db)
 install Java (JDK)
 install Maven (or download war file from a release, once there is one)
     clone repository
@@ -22,7 +23,18 @@ set up database
     	psql -f familyphotos.sql familyphotos familyphotos_admin --password
     	add photos
     	    put photos in folder ~/Pictures/4import2familyPhotos/
-    	    manually run src/main/java/add/ImportFromFolder
+    	    manually run src/main/java add.ImportFromFolder class (sorry, I have no easier solution yet)
+    	        if you've imported the repository as a project in an IDE simply run it from there
+    	        otherwise in terminal first extract the war file and then run it, e.g:
+    	            mkdir temp4familyPhotos
+    	            mv familyPhotos.war temp4familyPhotos
+    	            cd temp4familyPhotos
+    	            jar -xvf familyPhotos.war
+    	            cd WEB-INF
+    	            java -classpath "lib/*:classes/." add.ImportFromFolder 
+    	        Note: it will connect to db using credentials in ApplicationResources.properties
+    	        so if you've changed credentials listed above then also change them in properties
+    	        Note: photos can be of any type that normally has extension jpg,gif,png,psd,tif,bmp
 set up public route
     set up port forwarding on router
     optionally set up stable address
