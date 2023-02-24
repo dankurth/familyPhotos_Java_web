@@ -1,4 +1,8 @@
-current rough steps to just use this web application to share photos 
+I'm still porting to this repository, mostly from Struts 1 to Struts 2. Currently the application
+here as-is only shares 'public' photos (which is something that can be done better & more easily using 
+just Apache or Google Photos) so...it's not yet useful.
+
+That being said here are current rough notes outlining how to use it now. 
 
 CAUTION: Currently ALL photos on the application are viewable by ANYone who can browse to it.
 
@@ -23,7 +27,7 @@ set up database
     	psql -f familyphotos.sql familyphotos familyphotos_admin --password
     	add photos
     	    put photos in folder ~/Pictures/4import2familyPhotos/
-    	    manually run src/main/java add.ImportFromFolder class (sorry, I have no easier solution yet)
+    	    manually run src/main/java add.ImportFromFolder class (I have no easier solution yet)
     	        if you've imported the repository as a project in an IDE simply run it from there
     	        otherwise in terminal first extract the war file and then run it, e.g:
     	            mkdir temp4familyPhotos

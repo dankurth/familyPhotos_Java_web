@@ -9,11 +9,10 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 
 <html>
 <head>
-<link href="/familyPhotos/common/css/styles.css" rel="stylesheet">
 <meta name="viewport" content="width=device-width">
 <title><s:text name="app.title"/></title>
 <base>
-
+<link href="common/css/styles.css" rel="stylesheet">
 <style>
 
 body {
@@ -65,10 +64,10 @@ var indexMin = 0;
 var indexMax = ${picturesSize-1};
 
 function updateImages() {
-if (index+${length}-1 < indexMax) document.images.next.src="/familyPhotos/common/images/arrow_small_right.gif";
-	else document.images.next.src="/familyPhotos/common/images/arrow_small_right_disabled.gif";
-	if (index > indexMin) document.images.prev.src="/familyPhotos/common/images/arrow_small_left.gif";
-	else document.images.prev.src="/familyPhotos/common/images/arrow_small_left_disabled.gif";
+if (index+${length}-1 < indexMax) document.images.next.src="common/images/arrow_small_right.gif";
+	else document.images.next.src="common/images/arrow_small_right_disabled.gif";
+	if (index > indexMin) document.images.prev.src="common/images/arrow_small_left.gif";
+	else document.images.prev.src="common/images/arrow_small_left_disabled.gif";
 // img down removed, apparently
 //	if (indexMax > -1) document.images.down.src="/pics_struts/common/images/arrow_small_down.gif";
 //	else document.images.down.src="/pics_struts/common/images/arrow_small_down_disabled.gif";
@@ -172,7 +171,7 @@ function login() {
 
 <center>
 <span>
-<img style="float:left" name="prev" src="/familyPhotos/common/images/arrow_small_left.gif" onclick="decrement()">&nbsp;
+<img style="float:left" name="prev" src="common/images/arrow_small_left.gif" onclick="decrement()">&nbsp;
 
 <%-- for now keep it simple, public viewable photos only so no need to log in
 <s:property value="#user"/>
@@ -181,12 +180,12 @@ function login() {
 </s:if>
 <s:else>
 <s:property value="#user"/>
-<img src="/familyPhotos/common/images/logout.png" width=22 height=20 style="float:center" onclick="logoff()">
-<form style="display: none" name="logoffForm" action="/familyPhotos/logoff" ></form>
+<img src="common/images/logout.png" width=22 height=20 style="float:center" onclick="logoff()">
+<form style="display: none" name="logoffForm" action="logoff" ></form>
 </s:else>
   --%>
  
-<img style="float:right" name="next" src="/familyPhotos/common/images/arrow_small_right.gif" onclick="increment()">
+<img style="float:right" name="next" src="common/images/arrow_small_right.gif" onclick="increment()">
 </span>
 </center>
 
@@ -204,7 +203,7 @@ For now going with what works best for me. -->
    <s:if test="(#status.index >= #session.offset) && (#status.index < #session.offset+#session.length)">
       <img width="165px" 
       alt="<s:property value='summary'/>" onclick="viewPictureDetails('<s:property value='%{#status.index}'/>')"  
-      src="/familyPhotos/getImage?size=thumbnails&index=<s:property value='#status.index'/>" 
+      src="getImage?size=thumbnails&index=<s:property value='#status.index'/>" 
       >
    </s:if>
 </s:iterator>
@@ -216,15 +215,15 @@ For now going with what works best for me. -->
   
 </div> <!-- container -->
 
-     	<form style="display: none" name="prev" action="/familyPhotos/viewPicturesProcess"> 
+     	<form style="display: none" name="prev" action="viewPicturesProcess"> 
    		<input type="hidden" name="action" value="prevPictures">       	
    		</form>      
 
-	   	<form style="display: none" name="next" action="/familyPhotos/viewPicturesProcess"> 
+	   	<form style="display: none" name="next" action="viewPicturesProcess"> 
    		<input type="hidden" name="action" value="nextPictures">       	
    		</form>      
    		
-   		<form style="display: none" name="aForm" method="post" action="/familyPhotos/viewPicture">
+   		<form style="display: none" name="aForm" method="post" action="viewPicture">
    		<input type="hidden" name="index" value="{#request.index}">
    		</form>
 

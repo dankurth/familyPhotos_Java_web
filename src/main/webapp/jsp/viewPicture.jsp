@@ -26,10 +26,10 @@ var indexMin = 0;
 var indexMax = <s:property value="#picturesSize"/> - 1;
 
 function updateImages() {
-    if (index < indexMax) document.images.next.src="/familyPhotos/common/images/arrow_small_right.gif";
-	else document.images.next.src="/familyPhotos/common/images/arrow_small_right_disabled.gif";
-	if (index > indexMin) document.images.prev.src="/familyPhotos/common/images/arrow_small_left.gif";
-	else document.images.prev.src="/familyPhotos/common/images/arrow_small_left_disabled.gif";
+    if (index < indexMax) document.images.next.src="common/images/arrow_small_right.gif";
+	else document.images.next.src="common/images/arrow_small_right_disabled.gif";
+	if (index > indexMin) document.images.prev.src="common/images/arrow_small_left.gif";
+	else document.images.prev.src="common/images/arrow_small_left_disabled.gif";
 }
 
 function decrement() {
@@ -56,7 +56,7 @@ function setPicSizeNow(size) {
 	}
 	//TODO: persist medium for prev, next display
 	
-    psf='/familyPhotos/getImage.do?size='+picSize+'&index=<s:property value="#index" />'; 
+    psf='getImage?size='+picSize+'&index=<s:property value="#index" />'; 
 	document.images.picImage.src=psf;
 	document.forms.prev.elements.picSize.value=picSize;
 	document.forms.next.elements.picSize.value=picSize;	
@@ -69,15 +69,15 @@ function setPicSize(size) {
 }
 
 function viewPicturePopup() {
-	centerPopup('/familyPhotos/jsp/viewPcturePopup.htm','pic', 1024, 868); //768?
+	centerPopup('jsp/viewPcturePopup.htm','pic', 1024, 868); //768?
 }
 
 function viewFilmStripPopup() {
-	centerPopup('/familyPhotos/jsp/viewFilmStripPopup.htm','pic', 1024, 868); //768?
+	centerPopup('jsp/viewFilmStripPopup.htm','pic', 1024, 868); //768?
 }
 
 </script>
-<script src="/familyPhotos/common/scripts/popup.js"></script>
+<script src="common/scripts/popup.js"></script>
 <style type="text/css">
 form {
 margin-top: 0;
@@ -122,8 +122,8 @@ width: 50%;
 <table>
 <tr>
 <td valign="top" align="left" width="50%">
-<img name="prev" src="/familyPhotos/common/images/arrow_small_left.gif" onclick="decrement()">&nbsp;
-      <form name="prev" method="post" action="/familyPhotos/viewPictureProcess"> 
+<img name="prev" src="common/images/arrow_small_left.gif" onclick="decrement()">&nbsp;
+      <form name="prev" method="post" action="viewPictureProcess"> 
       <input type="hidden" name="action" value="prevPicture">         
       <input type="hidden" name="picSize" value=<s:property value="#picSize"/>>
       <input type="hidden" name="index" value=<s:property value="#index"/>>
@@ -131,14 +131,14 @@ width: 50%;
 </td>
 
 <td valign="top" align="left">
-<img name="up" src="/familyPhotos/common/images/arrow_small_up.gif" onclick="showList()">&nbsp; <!-- function name must be different than form name else calls form  -->
-       <form name="showListForm" method="post" action="/familyPhotos/viewPictures" >
+<img name="up" src="common/images/arrow_small_up.gif" onclick="showList()">&nbsp; <!-- function name must be different than form name else calls form  -->
+       <form name="showListForm" method="post" action="viewPictures" >
        </form>    
 </td>
 
 <td valign="top" align="right" width="95%">
-<img name="next" src="/familyPhotos/common/images/arrow_small_right.gif" onclick="increment()">
-      <form name="next" method="post" action="/familyPhotos/viewPictureProcess"> 
+<img name="next" src="common/images/arrow_small_right.gif" onclick="increment()">
+      <form name="next" method="post" action="viewPictureProcess"> 
       <input type="hidden" name="action" value="nextPicture">         
       <input type="hidden" name="picSize" value=<s:property value="#picSize"/>>
       <input type="hidden" name="index" value=<s:property value="#index"/>>
@@ -149,7 +149,7 @@ width: 50%;
  </table>
 
 <div class="imageBox">
-<img name="picImage" src='/familyPhotos/getImage?size=<s:property value="#picSize" />&index=<s:property value="#index" />' />
+<img name="picImage" src='getImage?size=<s:property value="#picSize" />&index=<s:property value="#index" />' />
 </div>
 
 <!-- picture details start -->
