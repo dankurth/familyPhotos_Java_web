@@ -101,16 +101,11 @@ width: 50%;
 </head>
 
 <body topmargin="0" bgcolor="white" onload="updateImages()" >
-
-<s:actionerror/>
-
-<%-- better, not yet improving...for now just replacing existing content
 <s:if test="hasActionErrors()">
    <div>
       <s:actionerror/>
    </div>
 </s:if>
- --%>
  	
 <s:if test="hasActionMessages()">
 <table><tr><td align="center">

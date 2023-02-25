@@ -27,9 +27,6 @@ public final class ViewPictureProcessAction extends ActionSupport implements Ser
 	public String execute() {
 
 		HttpSession session = request.getSession();
-		String action = getAction();
-		int index = getIndex();
-		String picSize = getPicSize(); 
 		String target = ERROR;
 		
 		ArrayList<?> pictures = (ArrayList<?>)session.getAttribute("pictures");

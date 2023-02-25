@@ -25,29 +25,6 @@ public final class ViewPictureInitAction extends ActionSupport implements Servle
 		HttpSession session = request.getSession();
 		String username = request.getRemoteUser();
 		
-/*
- * The following convoluted code is necessary because /viewPicture.do and hence this class
- * can be reached directly from either ViewPictureProcessAction which sets index on the 
- * request attribute, or from viewPictures.jsp which sets index as a request parameter. 
- * So one or the other may be null. Also both may be NOT null as in the case of coming from
- * viewPicture.jsp in which case incrementing or decrementing index which has to be used instead
- * of the old value still in parameter. ALSO in the case of coming directly from viewPictures.jsp
- * need to add the parameter value as attribute else viewPicture.jsp will complain that the 
- * bean "index" cannot be found. All of which has me looking for a more consistent way to map
- * these in struts config, but nothing comes immediately to mind hence this hack code to 
- * work around the use of both parameter and attribute for passing index to /viewPicture.
- * 		
- */
-		Object indexAttrib = request.getAttribute("index");
-		int index = 0;
-		if (indexAttrib != null) {
-			index = (Integer) indexAttrib;
-		}
-		else {
-			index = getIndex();
-			request.setAttribute("index", index);
-		}
-		
 		String picSize = (String)request.getAttribute("picSize");
 		if (picSize == null) {
 			picSize = "1024x768";

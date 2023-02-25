@@ -58,7 +58,7 @@ public class GetImageAction extends ActionSupport implements ServletRequestAware
 		HttpSession session = request.getSession();
 
 		ArrayList<?> pictures = (ArrayList<?>) session.getAttribute("pictures");
-		Picture picture = (Picture) pictures.get(getIndex());
+		Picture picture = (Picture) pictures.get(index);
 		String md5 = picture.getMD5();
 
 		String query = "SELECT smallblob, LENGTH(smallblob) FROM pictures WHERE md5 = ?";

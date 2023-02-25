@@ -54,7 +54,7 @@ public class ViewPicturesInitAction extends ActionSupport implements ServletRequ
 		session.setAttribute("length", length);
 		session.setAttribute("picturesSize", pictures.size());
 		
-		Integer index = (Integer)session.getAttribute("index"); // quick hack!!! //TODO test
+		Integer index = (Integer)session.getAttribute("index"); 
 		if (index == null) session.setAttribute("index", 0);
 		return SUCCESS;	
 	}

@@ -78,7 +78,6 @@ function decrement() {
 }
 
 function increment() {
-//	if (index < indexMax) document.forms.next.submit();
 	if (index+${length}-1 < indexMax) document.forms.next.submit();
 }
 
@@ -99,15 +98,11 @@ function login() {
 </head>
 
 <body bgcolor="white" onload="updateImages()">
-<s:actionerror/>
-
-<%-- better, not yet improving...for now just replacing existing content
 <s:if test="hasActionErrors()">
    <div>
       <s:actionerror/>
    </div>
 </s:if>
- --%>
  	
 <s:if test="hasActionMessages()">
 <table><tr><td align="center">
@@ -224,7 +219,7 @@ For now going with what works best for me. -->
    		</form>      
    		
    		<form style="display: none" name="aForm" method="post" action="viewPicture">
-   		<input type="hidden" name="index" value="{#request.index}">
+   		<input type="hidden" name="index"> value filled in via js function -->
    		</form>
 
 </body>

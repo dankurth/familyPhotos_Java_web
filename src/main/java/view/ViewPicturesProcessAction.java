@@ -21,8 +21,6 @@ public class ViewPicturesProcessAction extends ActionSupport implements ServletR
 
 	public String execute() {
 
-		String action = getAction();
-
 		HttpSession session = request.getSession();
 		int offset = (Integer) session.getAttribute("offset");
 		int length = (Integer) session.getAttribute("length");
