@@ -25,6 +25,46 @@
 	<session-config>
         <tracking-mode>COOKIE</tracking-mode>
     </session-config>
-	
-</web-app>
+  <!-- Security -->
 
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>user</web-resource-name>
+      <url-pattern>/loginProcess.action</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>user</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>admin</web-resource-name>
+      <url-pattern>/admin</url-pattern>
+      <url-pattern>/addPictures</url-pattern>
+      <url-pattern>/changePassword</url-pattern>
+      <url-pattern>/changePasswordProcess</url-pattern>
+      <url-pattern>/changeEmail</url-pattern>
+      <url-pattern>/changeEmailProcess</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>admin</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <login-config>
+    <auth-method>FORM</auth-method>
+    <form-login-config>
+    <form-login-page>/jsp/login.jsp</form-login-page>
+    <form-error-page>/jsp/login.jsp</form-error-page>
+    </form-login-config>
+  </login-config>
+
+    <security-role>
+      <role-name>user</role-name>
+    </security-role>
+    <security-role>
+      <role-name>admin</role-name>
+    </security-role>    
+
+</web-app>

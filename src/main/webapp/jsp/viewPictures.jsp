@@ -89,10 +89,6 @@ function logoff() {
 	document.forms.logoffForm.submit();
 }
 
-function login() {
-	document.forms.loginForm.submit();
-}
-
 </script>
 
 </head>
@@ -111,8 +107,6 @@ function login() {
 <hr>
  </s:if>
  
-<s:set var="user" value="%{#session.username}"/>
-
 <div class="container">
   <div class="header">
   <!-- hide search option for now 
@@ -168,27 +162,18 @@ function login() {
 <span>
 <img style="float:left" name="prev" src="common/images/arrow_small_left.gif" onclick="decrement()">&nbsp;
 
-<%-- for now keep it simple, public viewable photos only so no need to log in
-<s:property value="#user"/>
-<s:if test="%{#session.username==''}">
-<s:a action="/loginProcess">login</s:a>
-</s:if>
-<s:else>
-<s:property value="#user"/>
+<% if (request.getRemoteUser() == null) { %>
+<s:a action="login"><s:text name="login" /></s:a>
+<% } else { %>
+<%=request.getRemoteUser() %>   
 <img src="common/images/logout.png" width=22 height=20 style="float:center" onclick="logoff()">
-<form style="display: none" name="logoffForm" action="logoff" ></form>
-</s:else>
-  --%>
+<form style="display: none" name="logoffForm" method="post" action="logoff"></form>
+<% } %>
  
 <img style="float:right" name="next" src="common/images/arrow_small_right.gif" onclick="increment()">
 </span>
 </center>
 
-<!-- choosing display width of 330px simply because that looks best on my Avid 579 phone  which
-supposedly has 720x1440 pixels but acts as though it has 360x720 pixels ???. At any rate thumbnails
-pics are blurry at 330 so resized them to 360 then reduce size here (or in other app) to fit,
-may also allow user to choose thumbnail size or on mobile set it to match width dynamically.
-For now going with what works best for me. -->    
  </div>
   <div class="body">
     <div class="content">

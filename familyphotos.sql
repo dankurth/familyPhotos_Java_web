@@ -50,4 +50,7 @@ CREATE TABLE groups (
     member character varying(30) NOT NULL
 );
 
-
+-- user_pass is encrypted using org.apache.commons.codec.digest.DigestUtils.sha256Hex(password)
+-- plain text password to use to login for user 'demo' is also 'demo'
+insert into users (user_name,user_pass) values ('demo','2a97516c354b68848cdbd8f54a226a0a55b21ed138e207ad6c5cbb9c00aa5aea');
+insert into user_roles (user_name, role_name) values ('demo','user');

@@ -23,21 +23,16 @@ public class ViewPicturesInitAction extends ActionSupport implements ServletRequ
 	public String execute() {
 
 		HttpSession session = request.getSession();
-		String username = (String)session.getAttribute("username");
-		if (username == null) {
-			username = "";
-			session.setAttribute("username", username);
-		}
 		ArrayList<?> pictures = (ArrayList<?>)session.getAttribute("pictures");
 		
 		if (pictures == null) {
 			PicturesDAO picturesDAO = new PicturesDAO();
 			try {
-				pictures = picturesDAO.getPictures(username);
+				pictures = picturesDAO.getPictures(request.getRemoteUser());
 				session.setAttribute("pictures", pictures);
 				session.setAttribute("offset", 0);
 				
-				Integer index = (Integer)session.getAttribute("index"); // quick hack!!! //TODO test
+				Integer index = (Integer)session.getAttribute("index");
 				if (index == null) session.setAttribute("index", 0);
 
 			} catch (Exception e) {
