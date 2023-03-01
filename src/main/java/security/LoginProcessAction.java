@@ -24,7 +24,6 @@ public final class LoginProcessAction extends ActionSupport implements ServletRe
 		try {
 			request.login(username, password);
 			HttpSession session = request.getSession();
-			session.removeAttribute("failedAuthentication"); // cleanup login.jsp
 			session.setAttribute("pictures", null);
 			boolean isInFamilyGroup = PersistenceBroker.isInGroup(username, "family");
 			if (isInFamilyGroup) {

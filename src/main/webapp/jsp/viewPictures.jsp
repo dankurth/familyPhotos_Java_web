@@ -89,6 +89,10 @@ function logoff() {
 	document.forms.logoffForm.submit();
 }
 
+function showMenu() {
+	document.forms.menuForm.submit();
+}
+
 </script>
 
 </head>
@@ -168,6 +172,9 @@ function logoff() {
 <%=request.getRemoteUser() %>   
 <img src="common/images/logout.png" width=22 height=20 style="float:center" onclick="logoff()">
 <form style="display: none" name="logoffForm" method="post" action="logoff"></form>
+
+<img src="common/images/settings.gif" onclick="showMenu()" >
+<form style="display: none" name="menuForm" method="post" action="menu"></form>
 <% } %>
  
 <img style="float:right" name="next" src="common/images/arrow_small_right.gif" onclick="increment()">

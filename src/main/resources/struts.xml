@@ -8,8 +8,9 @@
 	<constant name="struts.devMode" value="true" />
 
 	<package name="basicstruts2" extends="struts-default">
-		<action name="/index">
-			<result>/index.jsp</result>
+		
+		<action name="menu">
+			<result>/jsp/menu.jsp</result>
 		</action>
 
         <action name="login">

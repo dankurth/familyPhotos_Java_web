@@ -30,10 +30,17 @@
   <security-constraint>
     <web-resource-collection>
       <web-resource-name>user</web-resource-name>
+      <url-pattern>/menu</url-pattern>
       <url-pattern>/loginProcess.action</url-pattern>
+      <url-pattern>/addPictures</url-pattern>
+      <url-pattern>/changePassword</url-pattern>
+      <url-pattern>/changePasswordProcess</url-pattern>
+      <url-pattern>/changeEmail</url-pattern>
+      <url-pattern>/changeEmailProcess</url-pattern>
     </web-resource-collection>
     <auth-constraint>
       <role-name>user</role-name>
+      <role-name>admin</role-name>
     </auth-constraint>
   </security-constraint>
 
@@ -41,11 +48,6 @@
     <web-resource-collection>
       <web-resource-name>admin</web-resource-name>
       <url-pattern>/admin</url-pattern>
-      <url-pattern>/addPictures</url-pattern>
-      <url-pattern>/changePassword</url-pattern>
-      <url-pattern>/changePasswordProcess</url-pattern>
-      <url-pattern>/changeEmail</url-pattern>
-      <url-pattern>/changeEmailProcess</url-pattern>
     </web-resource-collection>
     <auth-constraint>
       <role-name>admin</role-name>
