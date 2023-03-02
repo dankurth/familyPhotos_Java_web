@@ -22,10 +22,15 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 </s:if>
 
 <% if (request.isUserInRole("admin")) { %>
-add user<br>
+<%--admin stuff --%>
 <% } %>
-normal user stuff<br>
-<s:a href="viewPictures">return</s:a>
+<%--user stuff (constraint in web.xml) --%>
+
+<s:a href="changePassword"><s:text name="changePassword"/></s:a> <br>
+
+
+<br>
+<s:a href="viewPictures">cancel</s:a>
 
 </body>
 </html>

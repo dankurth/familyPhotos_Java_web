@@ -8,40 +8,58 @@
 	<constant name="struts.devMode" value="true" />
 
 	<package name="basicstruts2" extends="struts-default">
-		
+
+		<action name="changePassword"
+			class="security.ChangePasswordInitAction">
+			<result name="success">jsp/changePassword.jsp</result>
+		</action>
+
+		<action name="changePasswordProcess"
+			class="security.ChangePasswordProcessAction">
+			<result name="success" type="chain">menu</result>
+			<result name="cancel" type="chain">menu</result>
+			<result name="error">jsp/changePassword.jsp/></result>
+		</action>
+
+		<action name="getImage" class="view.GetImageAction"
+			method="execute" />
+
+		<action name="login">
+			<result>/jsp/login.jsp</result>
+		</action>
+
+		<action name="loginProcess" class="security.LoginProcessAction"
+			method="execute">
+			<result name="success" type="chain">viewPictures</result>
+			<result name="error">/jsp/login.jsp</result>
+		</action>
+
+		<action name="logoff" class="security.LogoffProcessAction"
+			method="execute">
+			<result name="success" type="chain">viewPictures</result>
+		</action>
+
 		<action name="menu">
 			<result>/jsp/menu.jsp</result>
 		</action>
 
-        <action name="login">
-            <result>/jsp/login.jsp</result>
-        </action>
-
-		<action name="loginProcess" class="security.LoginProcessAction" method="execute">
-			<result name="success" type="chain">viewPictures</result>
-			<result name="cancel" type="chain">viewPictures</result>
-			<result name="error">/jsp/login.jsp</result>
-		</action>
-
-		<action name="logoff" class="security.LogoffProcessAction" method="execute" >
-			<result name="success" type="chain">viewPictures</result>
-       </action>
-       
-		<action name="getImage" class="view.GetImageAction" method="execute" />
-
-		<action name="viewPicture" class="view.ViewPictureInitAction" method="execute">
+		<action name="viewPicture" class="view.ViewPictureInitAction"
+			method="execute">
 			<result name="success">jsp/viewPicture.jsp</result>
 		</action>
 
-		<action name="viewPictureProcess" class="view.ViewPictureProcessAction" method="execute">
+		<action name="viewPictureProcess"
+			class="view.ViewPictureProcessAction" method="execute">
 			<result name="success" type="chain">viewPicture</result>
 		</action>
 
-		<action name="viewPictures" class="view.ViewPicturesInitAction" method="execute">
+		<action name="viewPictures" class="view.ViewPicturesInitAction"
+			method="execute">
 			<result name="success">jsp/viewPictures.jsp</result>
 		</action>
 
-		<action name="viewPicturesProcess" class="view.ViewPicturesProcessAction" method="execute">
+		<action name="viewPicturesProcess"
+			class="view.ViewPicturesProcessAction" method="execute">
 			<result name="success" type="chain">viewPictures</result>
 		</action>
 
