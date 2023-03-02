@@ -24,7 +24,7 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 <table><tr><td align="center">
 <b><font color="green"><s:actionmessage/></font></b>
 </td></tr></table>
-<hr>
+<br>
 </s:if>
 
 <form action="changePasswordProcess">
@@ -46,7 +46,7 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
       <s:text name="prompt.newPassword"/>
     </th>
     <td align="left">
-    	<input type="password" name="newPassword" size="26" maxlength="24"/>
+    	<input type="password" name="newPassword" size="27" maxlength="25"/>
     </td>
   </tr>
 
@@ -55,7 +55,7 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
       <s:text name="prompt.verifyNewPassword"/>
     </th>
     <td align="left">
-    	<input type="password" name="newPassword2" size="26" maxlength="24"/>
+    	<input type="password" name="newPassword2" size="27" maxlength="25"/>
     </td>
   </tr>
 
@@ -74,6 +74,8 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 </form>
 
 <form style="display: none" name="menuForm" method="post" action="menu"></form>
+
+New Password must be between 4 to 24 characters long and may not contain space (" ") as a character.
 
 </body>
 </html>

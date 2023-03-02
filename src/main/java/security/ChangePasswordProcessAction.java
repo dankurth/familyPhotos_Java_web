@@ -28,17 +28,34 @@ public final class ChangePasswordProcessAction extends ActionSupport implements 
 				addActionError(getText("error.profile.currentPasswordInvalid"));
 				return ERROR;
 			}
-			usersDAO.updateUserPassword(username, newPassword);
-
-			addActionMessage(getText("success.passwordChanged"));
-
+			if (newPassword.contains(" ")) {
+				addActionError("New Password contains space as a character");
+				return ERROR;
+			}
+			if (newPassword.length()<4) {
+				addActionError("New Password is too short");
+				return ERROR;
+			}
+			if (newPassword.length()>24) {
+				addActionError("New Password is too long");
+				return ERROR;
+			}
+			if (!newPassword.equals(newPassword2)) {
+				addActionError("New Password and Verify Password are different");
+				return ERROR;
+			}
+			if (1 != usersDAO.updateUserPassword(username, newPassword)) {
+				addActionError(getText("error.profile.unknownErrorChangingPassword"));
+				return ERROR;
+			}
 		}
 		catch (Exception e) {
-			addActionError(getText("error.profile.unknownErrorChangingPassword"));
 			e.printStackTrace();
+			addActionError(getText("error.profile.unknownErrorChangingPassword"));
 			return ERROR;
 		}
 
+		addActionMessage(getText("success.passwordChanged"));
 		return SUCCESS;
 	}
 

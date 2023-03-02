@@ -16,9 +16,8 @@
 
 		<action name="changePasswordProcess"
 			class="security.ChangePasswordProcessAction">
-			<result name="success" type="chain">menu</result>
-			<result name="cancel" type="chain">menu</result>
-			<result name="error">jsp/changePassword.jsp/></result>
+			<result name="success">jsp/changePassword.jsp</result>
+			<result name="error">jsp/changePassword.jsp</result>
 		</action>
 
 		<action name="getImage" class="view.GetImageAction"

@@ -21,6 +21,14 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
    </div>
 </s:if>
 
+<s:if test="hasActionMessages()">
+<table><tr><td align="center">
+<b><font color="green"><s:actionmessage/></font></b>
+</td></tr></table>
+<hr>
+</s:if>
+
+
 <% if (request.isUserInRole("admin")) { %>
 <%--admin stuff --%>
 <% } %>
