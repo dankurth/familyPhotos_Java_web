@@ -12,6 +12,7 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 <meta name="viewport" content="width=device-width">
 <title><s:text name="app.title"/></title>
 <base>
+<s:head/>
 </head>
 <body bgcolor="white">
 
@@ -22,15 +23,13 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 </s:if>
 
 <s:if test="hasActionMessages()">
-<table><tr><td align="center">
-<b><font color="green"><s:actionmessage/></font></b>
-</td></tr></table>
-<hr>
+<div>
+<s:actionmessage/>
+</div>
 </s:if>
 
-
 <% if (request.isUserInRole("admin")) { %>
-<%--admin stuff --%>
+<s:a href="addUser"><s:text name="addUser"/></s:a> <br>
 <% } %>
 <%--user stuff (constraint in web.xml) --%>
 

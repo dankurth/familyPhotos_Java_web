@@ -9,14 +9,25 @@
 
 	<package name="basicstruts2" extends="struts-default">
 
-		<action name="changePassword"
-			class="security.ChangePasswordInitAction">
-			<result name="success">jsp/changePassword.jsp</result>
+		<action name="addUser">
+			<result>/jsp/addUser.jsp</result>
+		</action>
+        
+		<action name="addUserProcess"
+			class="security.AddUserProcessAction">
+			<result name="success">jsp/addUser.jsp</result>
+			<result name="input">jsp/addUser.jsp</result>
+			<result name="error">jsp/addUser.jsp</result>
+		</action>
+
+		<action name="changePassword">
+			<result>jsp/changePassword.jsp</result>
 		</action>
 
 		<action name="changePasswordProcess"
 			class="security.ChangePasswordProcessAction">
 			<result name="success">jsp/changePassword.jsp</result>
+			<result name="input">jsp/changePassword.jsp</result>
 			<result name="error">jsp/changePassword.jsp</result>
 		</action>
 

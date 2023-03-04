@@ -40,10 +40,6 @@ public final class ChangePasswordProcessAction extends ActionSupport implements 
 				addActionError("New Password is too long");
 				return ERROR;
 			}
-			if (!newPassword.equals(newPassword2)) {
-				addActionError("New Password and Verify Password are different");
-				return ERROR;
-			}
 			if (1 != usersDAO.updateUserPassword(username, newPassword)) {
 				addActionError(getText("error.profile.unknownErrorChangingPassword"));
 				return ERROR;
@@ -57,6 +53,13 @@ public final class ChangePasswordProcessAction extends ActionSupport implements 
 
 		addActionMessage(getText("success.passwordChanged"));
 		return SUCCESS;
+	}
+	
+	public void validate() {
+		if (!newPassword.equals(newPassword2)) {
+			addActionError("New Password and Verify Password are different");
+		}
+		
 	}
 
 	public void setCurrentPassword(String currentPassword) {

@@ -1,7 +1,11 @@
 -- do NOT run as postgres, DO run as normal user using familyphotos_admin role ONLY
 -- as in: $ psql -f familyphotos.sql familyphotos familyphotos_admin --password
 
--- drop table pictures;
+drop table pictures;
+drop pictures_id_seq;
+drop table users;
+drop table user_roles;
+drop table groups;
 
 CREATE TABLE pictures (
     id integer NOT NULL,
@@ -34,6 +38,7 @@ ALTER TABLE ONLY pictures ALTER COLUMN id SET DEFAULT nextval('pictures_id_seq':
 ALTER TABLE ONLY pictures
     ADD CONSTRAINT pictures_md5_key UNIQUE (md5);
 
+
 CREATE TABLE user_roles (
     user_name character varying(30) NOT NULL,
     role_name character varying(15) NOT NULL
@@ -41,7 +46,8 @@ CREATE TABLE user_roles (
 
 CREATE TABLE users (
     user_name character varying(30) NOT NULL,
-    user_pass character varying(64) NOT NULL
+    user_pass character varying(64) NOT NULL,
+    email character varying(64)
 );
 
 CREATE TABLE groups (
@@ -51,10 +57,7 @@ CREATE TABLE groups (
 );
 
 -- user_pass is encrypted using org.apache.commons.codec.digest.DigestUtils.sha256Hex(password)
--- plain text password to use to login for users 'demo' and 'admin' (both) is also 'demo'
+-- plain text password for admin here is 'demo' 
 insert into users (user_name,user_pass) values ('admin','2a97516c354b68848cdbd8f54a226a0a55b21ed138e207ad6c5cbb9c00aa5aea');
-insert into user_roles (user_name, role_name) values ('admin','admin');
-
-insert into users (user_name,user_pass) values ('demo','2a97516c354b68848cdbd8f54a226a0a55b21ed138e207ad6c5cbb9c00aa5aea');
-insert into user_roles (user_name, role_name) values ('demo','user');
+insert into user_roles (user_name,role_name) values ('admin','admin');
 
