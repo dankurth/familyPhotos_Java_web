@@ -2,8 +2,7 @@
 -- as in: $ psql -f familyphotos.sql familyphotos familyphotos_admin --password
 
 drop table pictures;
-drop pictures_id_seq;
-drop table users;
+drop table users cascade;
 drop table user_roles;
 drop table groups;
 
@@ -38,17 +37,23 @@ ALTER TABLE ONLY pictures ALTER COLUMN id SET DEFAULT nextval('pictures_id_seq':
 ALTER TABLE ONLY pictures
     ADD CONSTRAINT pictures_md5_key UNIQUE (md5);
 
+CREATE TABLE users (
+    user_name character varying(30) NOT NULL,
+    user_pass character varying(64) NOT NULL,
+    email character varying(64)
+);
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (user_name);
 
 CREATE TABLE user_roles (
     user_name character varying(30) NOT NULL,
     role_name character varying(15) NOT NULL
 );
 
-CREATE TABLE users (
-    user_name character varying(30) NOT NULL,
-    user_pass character varying(64) NOT NULL,
-    email character varying(64)
-);
+ALTER TABLE ONLY user_roles
+    ADD CONSTRAINT user_roles_user_name_fkey FOREIGN KEY (user_name) REFERENCES users(user_name) ON UPDATE CASCADE ON DELETE CASCADE;
+
 
 CREATE TABLE groups (
     name character varying(15) NOT NULL,

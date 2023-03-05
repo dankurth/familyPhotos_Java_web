@@ -32,7 +32,7 @@ public final class ChangePasswordProcessAction extends ActionSupport implements 
 				return ERROR;
 			}
 			if (1 != usersDAO.updateUserPassword(username, newPassword)) {
-				addActionError(getText("error.profile.unknownErrorChangingPassword"));
+				addActionError(getText("updateUserPassword() failed"));
 				return ERROR;
 			}
 		}
