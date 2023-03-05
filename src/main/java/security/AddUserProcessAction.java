@@ -1,6 +1,7 @@
 package security;
 
 import javax.servlet.http.HttpServletRequest;
+import org.apache.commons.validator.routines.EmailValidator;
 
 import org.apache.struts2.interceptor.ServletRequestAware;
 
@@ -10,7 +11,7 @@ import dao.UsersDAO;
 
 public final class AddUserProcessAction extends ActionSupport implements ServletRequestAware {
 
-	
+	private static final EmailValidator emailValidator = EmailValidator.getInstance();
 	private String adminPassword;
 	private String email;
 	private String username;
@@ -62,7 +63,7 @@ public final class AddUserProcessAction extends ActionSupport implements Servlet
 	}
 	
 	public void validate() {
-		if (!email.contains("@")) {
+		if (!emailValidator.isValid(email)) {
 			addActionError("Invalid email");
 		}
 		

@@ -75,7 +75,13 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 
 <form style="display: none" name="menuForm" method="post" action="menu"></form>
 
-New Password must be between 4 to 24 characters long and may not contain space (" ") as a character.
+Password must contain at least one digit [0-9]<br>
+Password must contain at least one lower case character [a-z]<br>
+Password must contain at least one upper case character [A-Z]<br>
+Password must contain at least one character from !@#&(){}[]:;',?*~$^+-=<><br>
+Password must be at least 8 and no more than 24 characters long<br>
+Password may contain only digits,letters or: !@#&(){}[]:;',?*~$^+-=<>
+
 
 </body>
 </html>

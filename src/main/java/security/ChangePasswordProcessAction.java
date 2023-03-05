@@ -1,6 +1,9 @@
 package security;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 import org.apache.struts2.interceptor.ServletRequestAware;
 
@@ -28,18 +31,6 @@ public final class ChangePasswordProcessAction extends ActionSupport implements 
 				addActionError(getText("error.profile.currentPasswordInvalid"));
 				return ERROR;
 			}
-			if (newPassword.contains(" ")) {
-				addActionError("New Password contains space as a character");
-				return ERROR;
-			}
-			if (newPassword.length()<4) {
-				addActionError("New Password is too short");
-				return ERROR;
-			}
-			if (newPassword.length()>24) {
-				addActionError("New Password is too long");
-				return ERROR;
-			}
 			if (1 != usersDAO.updateUserPassword(username, newPassword)) {
 				addActionError(getText("error.profile.unknownErrorChangingPassword"));
 				return ERROR;
@@ -54,10 +45,52 @@ public final class ChangePasswordProcessAction extends ActionSupport implements 
 		addActionMessage(getText("success.passwordChanged"));
 		return SUCCESS;
 	}
-	
+    
+	// these chars only
+    private static final String PASSWORD_PATTERN_ONLY = "^[0-9a-zA-Z!@#&(){}\\[\\]:;',?\\*~$^+\\-=<>]*$";
+    private static final Pattern password_pattern_only = Pattern.compile(PASSWORD_PATTERN_ONLY);
+
+    private static final String PASSWORD_PATTERN_ALPHA_LOWER = "^.*[a-z]+.*$";
+    private static final Pattern password_pattern_alpha_lower = Pattern.compile(PASSWORD_PATTERN_ALPHA_LOWER);
+    
+    private static final String PASSWORD_PATTERN_ALPHA_UPPER = "^.*[A-Z]+.*$";
+    private static final Pattern password_pattern_alpha_upper = Pattern.compile(PASSWORD_PATTERN_ALPHA_UPPER);
+    
+    private static final String PASSWORD_PATTERN_DIGITS = "^.*[0-9]+.*$";
+    private static final Pattern password_pattern_digits = Pattern.compile(PASSWORD_PATTERN_DIGITS);
+
+    private static final String PASSWORD_PATTERN_SYMBOLS = "^.*[!@#&(){}\\[\\]:;',?\\*~$^+\\-=<>]+.*$";
+    private static final Pattern password_pattern_symbols = Pattern.compile(PASSWORD_PATTERN_SYMBOLS);
+
+    private static boolean isValid(final Pattern pattern, final String password) {
+        Matcher matcher = pattern.matcher(password);
+        return matcher.matches();
+    }
+
 	public void validate() {
 		if (!newPassword.equals(newPassword2)) {
-			addActionError("New Password and Verify Password are different");
+			addActionError("New Password and Verify Password must match");
+		}
+		if (newPassword.length()<8) {
+			addActionError("Password must be at least 8 characters long");
+		}
+		if (newPassword.length()>24) {
+			addActionError("Password must be no more than 24 characters long");
+		}
+		if (!isValid(password_pattern_only, newPassword)) {
+			addActionError("Password may contain only digits,letters or: !@#&(){}[]:;',?*~$^+-=<>");
+		}
+		if (!isValid(password_pattern_alpha_lower, newPassword)) {
+			addActionError("Password must contain at least one lower case character [a-z]");
+		}
+		if (!isValid(password_pattern_alpha_upper, newPassword)) {
+			addActionError("NPassword must contain at least one upper case character [A-Z]");
+		}
+		if (!isValid(password_pattern_digits, newPassword)) {
+			addActionError("Password must contain at least one digit [0-9]");
+		}
+		if (!isValid(password_pattern_symbols, newPassword)) {
+			addActionError("Password must contain at least one character from !@#&(){}[]:;',?*~$^+-=<>");
 		}
 		
 	}
