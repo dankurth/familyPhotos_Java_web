@@ -20,6 +20,17 @@
 			<result name="error">jsp/addUser.jsp</result>
 		</action>
 
+		<action name="changeEmail">
+			<result>jsp/changeEmail.jsp</result>
+		</action>
+
+		<action name="changeEmailProcess"
+			class="security.ChangeEmailProcessAction">
+			<result name="success">jsp/changeEmail.jsp</result>
+			<result name="input">jsp/changeEmail.jsp</result>
+			<result name="error">jsp/changeEmail.jsp</result>
+		</action>
+
 		<action name="changePassword">
 			<result>jsp/changePassword.jsp</result>
 		</action>
@@ -29,6 +40,17 @@
 			<result name="success">jsp/changePassword.jsp</result>
 			<result name="input">jsp/changePassword.jsp</result>
 			<result name="error">jsp/changePassword.jsp</result>
+		</action>
+
+		<action name="changeUsername">
+			<result>jsp/changeUsername.jsp</result>
+		</action>
+
+		<action name="changeUsernameProcess"
+			class="security.ChangeUsernameProcessAction">
+			<result name="success" type="chain">logoff</result>
+			<result name="input">jsp/changeUsername.jsp</result>
+			<result name="error">jsp/changeUsername.jsp</result>
 		</action>
 
 		<action name="getImage" class="view.GetImageAction"

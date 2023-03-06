@@ -27,7 +27,7 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
    </div>
 </s:if>
 
-<form action="changePasswordProcess">
+<form action="changePasswordProcess" method="post">
 <table border="0" width="100%">
 <tr><td align="center" colspan="2"><%=request.getRemoteUser() %></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
@@ -37,7 +37,7 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
       <s:text name="prompt.currentPassword"/>
     </th>
     <td align="left">
-    	<input type="password" name="currentPassword" size="27" maxlength="25"/>
+    	<input type="password" name="currentPassword" size="25" maxlength="24"/>
     </td>
   </tr>
 
@@ -46,7 +46,7 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
       <s:text name="prompt.newPassword"/>
     </th>
     <td align="left">
-    	<input type="password" name="newPassword" size="27" maxlength="25"/>
+    	<input type="password" name="newPassword" size="25" maxlength="24"/>
     </td>
   </tr>
 
@@ -55,7 +55,7 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
       <s:text name="prompt.verifyNewPassword"/>
     </th>
     <td align="left">
-    	<input type="password" name="newPassword2" size="27" maxlength="25"/>
+    	<input type="password" name="newPassword2" size="25" maxlength="24"/>
     </td>
   </tr>
 

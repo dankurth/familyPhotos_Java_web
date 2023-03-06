@@ -7,6 +7,7 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+import dao.UsersDAO;
 import persistence.PersistenceBroker;
 
 public final class LoginProcessAction extends ActionSupport implements ServletRequestAware {
@@ -22,6 +23,11 @@ public final class LoginProcessAction extends ActionSupport implements ServletRe
 	public String execute() {
 
 		try {
+			UsersDAO usersDAO = new UsersDAO();
+			if (!usersDAO.verifyUserPassword(username, password)) {
+				addActionError("invalid username and/or password");
+				return ERROR;
+			}
 			request.login(username, password);
 			HttpSession session = request.getSession();
 			session.setAttribute("pictures", null);
@@ -36,8 +42,7 @@ public final class LoginProcessAction extends ActionSupport implements ServletRe
 		} 
 		catch (Exception e) {
 			e.printStackTrace();
-//			addActionError(getText("failedAuthentication")); //TODO
-			addActionError("invalid username and/or password");
+			addActionError("unexpected error in LoginProcessAction");
 			return ERROR;
 		}
 	}

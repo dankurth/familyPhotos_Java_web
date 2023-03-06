@@ -1,8 +1,8 @@
 package security;
 
 import javax.servlet.http.HttpServletRequest;
-import org.apache.commons.validator.routines.EmailValidator;
 
+import org.apache.commons.validator.routines.EmailValidator;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
 import com.opensymphony.xwork2.ActionSupport;

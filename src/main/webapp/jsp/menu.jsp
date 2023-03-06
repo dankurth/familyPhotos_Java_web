@@ -32,10 +32,9 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 <s:a href="addUser"><s:text name="addUser"/></s:a> <br>
 <% } %>
 <%--user stuff (constraint in web.xml) --%>
-
-<s:a href="changePassword"><s:text name="changePassword"/></s:a> <br>
-
-
+<s:a href="changeEmail"><s:text name="change Email"/></s:a> <br>
+<s:a href="changePassword"><s:text name="change Password"/></s:a> <br>
+<s:a href="changeUsername"><s:text name="change Username"/></s:a> <br>
 <br>
 <s:a href="viewPictures">cancel</s:a>
 

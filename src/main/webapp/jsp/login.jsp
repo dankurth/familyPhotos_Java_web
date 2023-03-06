@@ -18,12 +18,20 @@ function home() {
 <meta name="viewport" content="width=device-width">
 <title><s:text name="app.title"/></title>
 <base>
+<s:head />
 </head>
 <body bgcolor="white">
+
 <s:if test="hasActionErrors()">
    <div>
-      <center><s:actionerror/></center>
+      <s:actionerror/>
    </div>
+</s:if>
+
+<s:if test="hasActionMessages()">
+<div>
+<s:actionmessage/>
+</div>
 </s:if>
 	
 <form name="homeForm" method="post" action="logoff"></form>	

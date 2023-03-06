@@ -30,12 +30,13 @@ public class UsersDAO extends BaseDAO {
 	}
 
     public User getUser(String username) throws Exception {
-		User user = new User();
+		User user = null;
 		Connection con = pool.getConnection();
 		PreparedStatement ps = null;
 		ps = con.prepareStatement("select * from users where user_name = '" + username + "'");
 		ResultSet rs = ps.executeQuery();
 		while (rs.next()) {
+			user = new User();
 			user.setUsername(rs.getString("user_name"));
 			user.setEmail(rs.getString("email"));
 		}
