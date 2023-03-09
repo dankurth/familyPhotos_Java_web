@@ -75,6 +75,17 @@
 			<result>/jsp/menu.jsp</result>
 		</action>
 
+		<action name="resetPasswordStart">
+			<result>jsp/resetPasswordStart.jsp</result>
+		</action>
+
+		<action name="resetPasswordStartProcess"
+			class="security.ResetPasswordStartProcessAction">
+			<result name="success">jsp/resetPasswordStart.jsp</result>
+			<result name="input">jsp/resetPasswordStart.jsp</result>
+			<result name="error">jsp/resetPasswordStart.jsp</result>
+		</action>
+
 		<action name="viewPicture" class="view.ViewPictureInitAction"
 			method="execute">
 			<result name="success">jsp/viewPicture.jsp</result>

@@ -30,7 +30,7 @@ public final class ChangeUsernameProcessAction extends ActionSupport implements 
 				addActionError(getText("error.profile.currentPasswordInvalid"));
 				return ERROR;
 			}
-			if (usersDAO.getUser(newUsername) != null) {
+			if (usersDAO.getEmail(newUsername) != null) {
 				addActionError(getText("error.usernameAlreadyExists"));
 				return ERROR;
 			}

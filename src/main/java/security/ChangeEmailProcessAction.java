@@ -28,7 +28,7 @@ public final class ChangeEmailProcessAction extends ActionSupport implements Ser
 				addActionError(getText("error.profile.currentPasswordInvalid"));
 				return ERROR;
 			}
-			if (email.equals(usersDAO.getUser(username).getEmail())) {
+			if (email.equals(usersDAO.getEmail(username))) {
 				addActionError("Current and new email must be different");
 				return ERROR;
 			}

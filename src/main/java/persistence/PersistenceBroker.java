@@ -2,6 +2,7 @@ package persistence;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -32,11 +33,19 @@ public final class PersistenceBroker {
 		return dao.getPictures(viewGroup);
 	}
 	
-	public static User getUser(String username_) {
+	@Deprecated
+	public static User getUser(String username) {
 		User user = null;
 		UsersDAO usersDAO = new UsersDAO();
 		try {
-			user = usersDAO.getUser(username_);
+			ArrayList<User> users = usersDAO.getUsers();
+			Iterator<User> iter = users.iterator();
+			while (iter.hasNext()) {
+				user = iter.next();
+				if (username.equals(user.getUsername())) {
+					break;
+				}
+			}
 		}
 		catch (Exception e) {
 			e.printStackTrace();

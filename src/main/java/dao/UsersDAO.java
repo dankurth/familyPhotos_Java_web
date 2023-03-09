@@ -29,20 +29,44 @@ public class UsersDAO extends BaseDAO {
 		return users;
 	}
 
-    public User getUser(String username) throws Exception {
-		User user = null;
+    /**
+     * 
+     * @param user_name
+     * @return email
+     * @throws Exception
+     */
+    public String getEmail(String user_name) throws Exception {
+		String email = null;
 		Connection con = pool.getConnection();
 		PreparedStatement ps = null;
-		ps = con.prepareStatement("select * from users where user_name = '" + username + "'");
+		ps = con.prepareStatement("select * from users where user_name = '" + user_name + "'");
 		ResultSet rs = ps.executeQuery();
 		while (rs.next()) {
-			user = new User();
-			user.setUsername(rs.getString("user_name"));
-			user.setEmail(rs.getString("email"));
+			email = rs.getString("email");
 		}
 		pool.releaseConnection(con);
-		return user;
+		return email;
 	}
+
+    /**
+     * 
+     * @param email
+     * @return user_name
+     * @throws Exception
+     */
+    public String getUsername(String email) throws Exception {
+		String user_name = null;
+		Connection con = pool.getConnection();
+		PreparedStatement ps = null;
+		ps = con.prepareStatement("select * from users where email = '" + email + "'");
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {
+			user_name = rs.getString("user_name");
+		}
+		pool.releaseConnection(con);
+		return user_name;
+	}
+    
     
    public boolean verifyUserPassword(String username, String password) throws Exception {
 	   boolean verified = false;
