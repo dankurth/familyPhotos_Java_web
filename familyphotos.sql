@@ -5,6 +5,7 @@ drop table pictures;
 drop table users cascade;
 drop table user_roles;
 drop table groups;
+drop table tokens;
 
 CREATE TABLE pictures (
     id integer NOT NULL,
@@ -46,6 +47,9 @@ CREATE TABLE users (
 ALTER TABLE ONLY users
     ADD CONSTRAINT users_pkey PRIMARY KEY (user_name);
 
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_email_key UNIQUE (email);
+
 CREATE TABLE user_roles (
     user_name character varying(30) NOT NULL,
     role_name character varying(15) NOT NULL
@@ -61,8 +65,18 @@ CREATE TABLE groups (
     member character varying(30) NOT NULL
 );
 
+CREATE TABLE tokens (
+    user_name character varying(30) NOT NULL,
+    timestamp timestamp NOT NULL,
+    enc_token character varying(64) NOT NULL
+);
+
+ALTER TABLE ONLY tokens
+    ADD CONSTRAINT tokens_user_name_fkey FOREIGN KEY (user_name) REFERENCES users(user_name) ON UPDATE CASCADE ON DELETE CASCADE;
+
 -- user_pass is encrypted using org.apache.commons.codec.digest.DigestUtils.sha256Hex(password)
 -- plain text password for admin here is 'demo' 
 insert into users (user_name,user_pass) values ('admin','2a97516c354b68848cdbd8f54a226a0a55b21ed138e207ad6c5cbb9c00aa5aea');
 insert into user_roles (user_name,role_name) values ('admin','admin');
+
 

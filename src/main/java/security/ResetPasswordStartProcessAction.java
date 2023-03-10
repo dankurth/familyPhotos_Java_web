@@ -1,6 +1,7 @@
 package security;
 
 import java.security.SecureRandom;
+import java.sql.Connection;
 import java.util.Base64;
 import java.util.Base64.Encoder;
 import java.util.Calendar;
@@ -13,6 +14,8 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+import dao.BaseDAO;
+import dao.TokensDAO;
 import dao.UsersDAO;
 
 public final class ResetPasswordStartProcessAction extends ActionSupport implements ServletRequestAware {
@@ -31,18 +34,15 @@ public final class ResetPasswordStartProcessAction extends ActionSupport impleme
 			String username = usersDAO.getUsername(email);
 			if (username == null) { // no user matching given email
 				// do nothing
-			}
+			} 
 			else {
-				System.out.println("time: " + Calendar.getInstance().getTimeInMillis());
-                System.out.println("email: " + email);
-                System.out.println("username:" + username);
 				String token = generateToken();
-				System.out.println("token: " + token);
-				String encryptedToken = DigestUtils.sha256Hex(token);
-				System.out.println("encryptedToken: " + encryptedToken);
+				TokensDAO tokensDAO = new TokensDAO();
+				tokensDAO.addToken(username, token); // encrypted token will be stored with username as key
+				// TODO: email token
+
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			addActionError("Unexpected error. Please notify admin.");
 			return ERROR;
@@ -55,19 +55,20 @@ public final class ResetPasswordStartProcessAction extends ActionSupport impleme
 	String generateToken() {
 		// credit: https://stackoverflow.com/a/50381020/4807510
 		SecureRandom random = new SecureRandom();
-	    byte bytes[] = new byte[20];
-	    random.nextBytes(bytes);
-	    Encoder encoder = Base64.getUrlEncoder().withoutPadding();
-	    String token = encoder.encodeToString(bytes);
-	    return token;
+		byte bytes[] = new byte[20];
+		random.nextBytes(bytes);
+		Encoder encoder = Base64.getUrlEncoder().withoutPadding();
+		String token = encoder.encodeToString(bytes);
+		return token;
 	}
-	
+
 	private static final EmailValidator emailValidator = EmailValidator.getInstance();
+
 	public void validate() {
 		if (!emailValidator.isValid(email)) {
 			addActionError("Invalid email");
 		}
-		if (email.length()>64) {  
+		if (email.length() > 64) {
 			addActionError("Email must be no more than 64 characters long");
 		}
 	}
@@ -75,6 +76,5 @@ public final class ResetPasswordStartProcessAction extends ActionSupport impleme
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 
 }
