@@ -17,10 +17,12 @@ import com.opensymphony.xwork2.ActionSupport;
 import dao.BaseDAO;
 import dao.TokensDAO;
 import dao.UsersDAO;
+import email.ResetMailer;
 
-public final class ResetPasswordStartProcessAction extends ActionSupport implements ServletRequestAware {
+public final class ResetPasswordProcessAction extends ActionSupport implements ServletRequestAware {
 
 	private String email;
+	private String token;
 	private HttpServletRequest request;
 
 	public void setServletRequest(HttpServletRequest httpServletRequest) {
@@ -33,14 +35,28 @@ public final class ResetPasswordStartProcessAction extends ActionSupport impleme
 			UsersDAO usersDAO = new UsersDAO();
 			String username = usersDAO.getUsername(email);
 			if (username == null) { // no user matching given email
-				// do nothing
-			} 
-			else {
+				addActionError("No match found for email");
+				return ERROR;
+			}
+			if (token == null) {
 				String token = generateToken();
 				TokensDAO tokensDAO = new TokensDAO();
 				tokensDAO.addToken(username, token); // encrypted token will be stored with username as key
-				// TODO: email token
-
+				String href = (request.getRequestURL().append("?email=" + email + "&token=" + token)).toString();
+				String link = "<a href='" + href + "' >click here to reset password</a>";
+				ResetMailer resetMailer = new ResetMailer();
+				resetMailer.sendMail(email, "Password Reset", link);
+				addActionMessage("Request submitted");
+			} 
+			else {
+				TokensDAO tokensDAO = new TokensDAO();
+				if (!tokensDAO.verifyToken(username,token)) {
+					addActionError("No match found for token");
+					return ERROR;
+				}
+				usersDAO.updateUserPassword(username, "changeMe");
+				addActionMessage("Your password is now 'changeMe' (without the quotes). Please use it to log in and Change Password");
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -48,7 +64,6 @@ public final class ResetPasswordStartProcessAction extends ActionSupport impleme
 			return ERROR;
 		}
 
-		addActionMessage("Request submitted"); // also same on "do nothing"
 		return SUCCESS;
 	}
 
@@ -75,6 +90,10 @@ public final class ResetPasswordStartProcessAction extends ActionSupport impleme
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 }

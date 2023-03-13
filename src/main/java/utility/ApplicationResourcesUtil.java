@@ -28,6 +28,7 @@ public class ApplicationResourcesUtil {
 	final public static String shotwellImportFolder = resourceBundle.getString("shotwellImportFolder");
 	final public static String imageFilesImportFolder = resourceBundle.getString("imageFilesImportFolder");
 	final public static String length = resourceBundle.getString("length");
-	
+	final public static String SMTP_USERNAME = resourceBundle.getString("smtp_username");
+	final public static String SMTP_PASSWORD = resourceBundle.getString("smtp_password");
 }
 

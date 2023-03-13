@@ -11,7 +11,7 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 <s:head/>
 <head>
 <meta name="viewport" content="width=device-width">
-<title><s:text name="title.resetPasswordStart"/></title>
+<title><s:text name="title.resetPassword"/></title>
 <base>
 </head>
 <body bgcolor="white">
@@ -27,7 +27,7 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
    </div>
 </s:if>
 
-<form action="resetPasswordStartProcess" method="post">
+<form action="resetPasswordProcess" method="post">
 <table border="0" width="100%">
 <tr><td align="center" colspan="2"><%=request.getRemoteUser() %></td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td></tr>

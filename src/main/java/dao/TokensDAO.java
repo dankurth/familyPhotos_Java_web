@@ -27,5 +27,20 @@ public class TokensDAO extends BaseDAO {
 	   pool.releaseConnection(con);
 	   return rowsUpdated;
       }
+    
+    public boolean verifyToken(String username, String token) throws Exception {
+  	   boolean verified = false;
+       String statement = "select count(*) from tokens where user_name = ? and enc_token = ?";
+       con = pool.getConnection();
+       PreparedStatement ps = con.prepareStatement(statement);
+       ps.setString(1, username);
+       ps.setString(2, DigestUtils.sha256Hex(token));
+ 	   ResultSet rs = ps.executeQuery();
+ 	   rs.next();
+ 	   int rows = rs.getInt("count");
+ 	   pool.releaseConnection(con);
+ 	   if (rows == 1) verified = true;
+ 	   return verified;
+    }
    
 }

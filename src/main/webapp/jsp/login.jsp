@@ -67,6 +67,6 @@ function home() {
   </tr>
 </table>
 </form>
-<s:a href="resetPasswordStart">Forgot Username &/or Password</s:a>
+<s:a href="resetPassword">Forgot Username &/or Password</s:a>
 </body>
 </html>
