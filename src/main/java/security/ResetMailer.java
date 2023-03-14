@@ -1,4 +1,4 @@
-package email;
+package security;
 
 import java.util.Properties;
 
@@ -23,7 +23,7 @@ public class ResetMailer {
         ResetMailer resetMailer = new ResetMailer();
         String href = "http://localhost:8080/familyPhotos/resetPasswordProcess?email="
         		+ "demo@somewhere.com&token=sYrQ4_V57CYgnFzSk5kBu8xIod8";
-        String link = "<a href='" + href + "' >click here to reset password</a>";
+        String link = "click <a href='" + href + "' >here</a> to reset password";
         resetMailer.sendMail("demo@somewhere.com", "Password Reset", link);
     }
     
@@ -64,7 +64,7 @@ public class ResetMailer {
 
             Transport.send(message);
 
-            System.out.println("Done");
+            System.out.println("ResetMailer has sent email to "+toAddress);
 
         } catch (MessagingException e) {
             e.printStackTrace();

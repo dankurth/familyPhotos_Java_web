@@ -17,7 +17,6 @@ import com.opensymphony.xwork2.ActionSupport;
 import dao.BaseDAO;
 import dao.TokensDAO;
 import dao.UsersDAO;
-import email.ResetMailer;
 
 public final class ResetPasswordProcessAction extends ActionSupport implements ServletRequestAware {
 
@@ -35,27 +34,32 @@ public final class ResetPasswordProcessAction extends ActionSupport implements S
 			UsersDAO usersDAO = new UsersDAO();
 			String username = usersDAO.getUsername(email);
 			if (username == null) { // no user matching given email
-				addActionError("No match found for email");
+				addActionError("email");
 				return ERROR;
 			}
-			if (token == null) {
+			if (usersDAO.isUserInRole(username,"admin")) { // does user for given email have admin role according to database?
+				addActionError("No match found for email");  // if so don't reset password
+				return ERROR;
+			}
+			if (token == null) { // user is initiating request
 				String token = generateToken();
 				TokensDAO tokensDAO = new TokensDAO();
+				tokensDAO.removeTokensFromUser(username); // db constraint: only one token allowed per user
 				tokensDAO.addToken(username, token); // encrypted token will be stored with username as key
 				String href = (request.getRequestURL().append("?email=" + email + "&token=" + token)).toString();
-				String link = "<a href='" + href + "' >click here to reset password</a>";
+				String link = "click <a href='" + href + "' >here</a> to reset password";
 				ResetMailer resetMailer = new ResetMailer();
 				resetMailer.sendMail(email, "Password Reset", link);
 				addActionMessage("Request submitted");
 			} 
-			else {
+			else { // using token already sent to user (or a bogus one)
 				TokensDAO tokensDAO = new TokensDAO();
-				if (!tokensDAO.verifyToken(username,token)) {
+				if (!tokensDAO.verifyToken(username,token)) { // authenticate this token against encrypted one in db for this username
 					addActionError("No match found for token");
 					return ERROR;
 				}
 				usersDAO.updateUserPassword(username, "changeMe");
-				addActionMessage("Your password is now 'changeMe' (without the quotes). Please use it to log in and Change Password");
+				addActionMessage("Your password is now 'changeMe' (without the quotes). Please log in now and use Change Password");
 				
 			}
 		} catch (Exception e) {

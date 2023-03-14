@@ -83,6 +83,22 @@ public class UsersDAO extends BaseDAO {
 	   return verified;
    }
 
+   public boolean isUserInRole(String username, String rolename) throws Exception {
+	   boolean verified = false;
+	   String s = "select count(*) as count from user_roles where user_name = ? and role_name = ?";
+	   con = pool.getConnection();
+	   PreparedStatement ps = con.prepareStatement(s);
+	   ps.setString(1, username);
+	   ps.setString(2, rolename);
+	   ResultSet rs = ps.executeQuery();
+	   rs.next();
+	   int rows = rs.getInt("count");
+	   pool.releaseConnection(con);
+	   if (rows > 0) verified = true;
+	   return verified;
+   }
+
+   
    public int updateUserPassword(String username, String password) throws Exception {
 	   String updateStatement = "update users set user_pass = ? where user_name = ?";
 	   con = pool.getConnection();

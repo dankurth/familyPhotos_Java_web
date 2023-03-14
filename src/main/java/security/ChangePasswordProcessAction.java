@@ -9,6 +9,7 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+import dao.TokensDAO;
 import dao.UsersDAO;
 
 public final class ChangePasswordProcessAction extends ActionSupport implements ServletRequestAware {
@@ -35,6 +36,8 @@ public final class ChangePasswordProcessAction extends ActionSupport implements 
 				addActionError(getText("updateUserPassword() failed"));
 				return ERROR;
 			}
+			TokensDAO tokensDAO = new TokensDAO(); // may have gotten here after using password reset token
+			tokensDAO.removeTokensFromUser(username); // regardless make it effectively one-use-only
 		}
 		catch (Exception e) {
 			e.printStackTrace();

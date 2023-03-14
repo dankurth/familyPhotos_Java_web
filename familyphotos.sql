@@ -73,6 +73,8 @@ CREATE TABLE tokens (
 
 ALTER TABLE ONLY tokens
     ADD CONSTRAINT tokens_user_name_fkey FOREIGN KEY (user_name) REFERENCES users(user_name) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE ONLY tokens
+    ADD CONSTRAINT tokens_user_name_key UNIQUE (user_name);
 
 -- user_pass is encrypted using org.apache.commons.codec.digest.DigestUtils.sha256Hex(password)
 -- plain text password for admin here is 'demo' 
